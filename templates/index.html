@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask POST Parsing - 0046</title>
+    <!-- Menghubungkan styles.css dari folder 'static' menggunakan fungsi url_for() milik Flask -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <main class="container">
+        <div class="card">
+            <header class="card-header">
+                <span class="badge">Python Flask</span>
+                <h1>Input Parameter POST</h1>
+                <p>Masukkan data di bawah ini untuk dikirim ke server menggunakan method <strong>POST</strong>.</p>
+            </header>
+
+            <!-- Atribut action mengarah ke fungsi index() dan method diatur ke POST -->
+            <form action="{{ url_for('index') }}" method="POST" class="form-container">
+                <!-- Pasangan Label dan TextField 1 -->
+                <div class="form-group">
+                    <label for="nama">Nama Lengkap</label>
+                    <input type="text" id="nama" name="nama" placeholder="Masukkan nama Anda..." required>
+                </div>
+
+                <!-- Pasangan Label dan TextField 2 -->
+                <div class="form-group">
+                    <label for="pesan">Pesan / Catatan</label>
+                    <input type="text" id="pesan" name="pesan" placeholder="Tuliskan pesan singkat..." required>
+                </div>
+
+                <!-- Komponen Button untuk mengirim form -->
+                <button type="submit" class="btn-submit">Kirim Parameter</button>
+            </form>
+
+            <!-- Bagian ini hanya dirender jika request POST berhasil diproses -->
+            {% if is_submitted %}
+            <section class="result-card">
+                <h2>Hasil Parsing Server</h2>
+                <div class="result-row">
+                    <span class="result-key">Nama:</span>
+                    <span class="result-val">{{ nama }}</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-key">Pesan:</span>
+                    <span class="result-val">{{ pesan }}</span>
+                </div>
+            </section>
+            {% endif %}
+        </div>
+    </main>
+</body>
+
+</html>
